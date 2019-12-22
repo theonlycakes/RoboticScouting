@@ -6,19 +6,31 @@
 </head>
 
 <body>
-		<p>Team Number</p>
+	<!-- form information -->
+	<p>Team Number</p>
 		<input type="number" id="teamNum" value="blank">
-		<br>
+	<p>Match Number</p>
+		<input type="number" id="matchNum" value="blank">
+	<br><br>
 		<input type="button" value="Save" onClick="saveFile()">
 </body>
 	<script>
 		let saveFile = () => {
+			//saves the form data as a variable that can be used by javascript
 			const teamNum = document.getElementById("teamNum");
+			const matchNum = document.getElementById("matchNum");
 			
-			let data = teamNum.value;
 			
+			//concatenates all the variables together
+			let data = teamNum.value + "," + matchNum.value;
+			
+			//makes the file name 
+			//should be unique for every match 
+			let fileName = teamNum.value + "_" + matchNum.value;
+			//all this is magic that saves the file
+			//don't touch
 			const textToBLOB = new Blob([data], { type: 'text/plain' });
-        	const sFileName = 'formData.txt';
+        	const sFileName = fileName + ".csv";
 			
 			let newLink = document.createElement("a");
         		newLink.download = sFileName;
