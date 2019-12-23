@@ -8,16 +8,41 @@
 <body>
 	<!-- form information -->
 	<p>Team Number</p>
-		<input type="number" id="teamNum" value="blank">
+		<input type="number" id="teamNum">
 	<p>Match Number</p>
-		<input type="number" id="matchNum" value="blank">
-	<p>Starting Position</p><form name="startPos">
+		<input type="number" id="matchNum">
+	<p>Starting Position</p>
+	<!-- form is needed so the data can be pulled from it -->
+	<form name="startPos">
 		<input type="radio" id="startPos" name="Pos" value="3"> Top <br>
 		<input type="radio" id="startPos1" name="Pos" value="2"> Middle <br>
 		<input type="radio" id="startPos2" name="Pos" value="1"> Bottom
 	</form>
-
-
+	<p>Balls Your Team Scored</p>
+		<input type="number" id="ballPoints">
+	<p>Hatches Your Team Scored</p>
+		<input type="number" id="hatchPoints">
+	<p>Score of Team's Alliance</p>
+		<input type="number" id="teanPoints">	
+	<p>Score of Opposing Alliance</p>
+		<input type="number" id="oppPoints">
+	<p>Did YOUR Team Play Defense or Offence</p>
+	<form name="Pos">
+		<input type="radio" id="Pos" name="Pos" value="3"> Defense <br>
+		<input type="radio" id="Pos1" name="Pos" value="2"> Offence <br>
+		<input type="radio" id="Pos2" name="Pos" value="1"> Mixed
+	</form>	
+	<p>Did Robot Stop Performing As Intended?</p>
+	<form name="work">
+		<input type="radio" id="Yes" name="work" value="1"> Yes <br>
+		<input type="radio" id="No" name="work" value="0"> No <br>
+	</form>	
+	<p>Ending Position</p>
+	<form name="endingPos">
+		<input type="radio" id="endingPos" name="Pos" value="3"> Top <br>
+		<input type="radio" id="endingPos1" name="Pos" value="2"> Middle <br>
+		<input type="radio" id="endingPos2" name="Pos" value="1"> Bottom
+	</form>
 	<br><br>
 		<input type="button" value="Save" onClick="saveFile()">
 </body>
@@ -25,10 +50,13 @@
 		let saveFile = () => {
 			//used to get the value from the radio buttons
 			const startPos = document.startPos.elements["Pos"];
-			
+			const Pos = document.Pos.elements["Pos"];
+			const work = document.work.elements["work"];
+			const endingPos = document.endingPos.elements["Pos"];
 			
 			//concatenates all the variables together
-			let data = teamNum.value + "," + matchNum.value + "," + startPos.value;
+			let data = teamNum.value + "," + matchNum.value + "," + startPos.value + "," + ballPoints.value + "," + hatchPoints.value + "," + teanPoints.value
+			 + "," + oppPoints.value + "," + Pos.value + "," + work.value + "," + endingPos.value;
 			
 			//makes the file name 
 			//should be unique for every match 
