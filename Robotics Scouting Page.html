@@ -11,18 +11,24 @@
 		<input type="number" id="teamNum" value="blank">
 	<p>Match Number</p>
 		<input type="number" id="matchNum" value="blank">
+	<p>Starting Position</p><form name="startPos">
+		<input type="radio" id="startPos" name="Pos" value="3"> Top <br>
+		<input type="radio" id="startPos1" name="Pos" value="2"> Middle <br>
+		<input type="radio" id="startPos2" name="Pos" value="1"> Bottom
+	</form>
+
+
 	<br><br>
 		<input type="button" value="Save" onClick="saveFile()">
 </body>
 	<script>
 		let saveFile = () => {
-			//saves the form data as a variable that can be used by javascript
-			const teamNum = document.getElementById("teamNum");
-			const matchNum = document.getElementById("matchNum");
+			//used to get the value from the radio buttons
+			const startPos = document.startPos.elements["Pos"];
 			
 			
 			//concatenates all the variables together
-			let data = teamNum.value + "," + matchNum.value;
+			let data = teamNum.value + "," + matchNum.value + "," + startPos.value;
 			
 			//makes the file name 
 			//should be unique for every match 
