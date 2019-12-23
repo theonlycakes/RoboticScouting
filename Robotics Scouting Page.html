@@ -3,16 +3,33 @@
 <head>
 <meta charset="utf-8">
 <title>Robotics Scouting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 	
+<style>
+	body {
+		background-color: white;
+	}
+	h1 {
+		color: black;
+	}
+	p {
+		font-weight: bold;
+		color: black;
+	}
+	form {
+		font-weight: bold;
+	}
+</style>	
 </head>
 
 <body>
+	<h1>Perkiomen Valley Robotics</h1>
 	<!-- form information -->
 	<p>Team Number</p>
 		<input type="number" id="teamNum">
 	<p>Match Number</p>
 		<input type="number" id="matchNum">
 	<p>Starting Position</p>
-	<!-- form is needed so the data can be pulled from it -->
+	<!-- form is needed so the data can be pulled from it with radio buttons -->
 	<form name="startPos">
 		<input type="radio" id="startPos" name="Pos" value="3"> Top <br>
 		<input type="radio" id="startPos1" name="Pos" value="2"> Middle <br>
