@@ -4,3 +4,4 @@ This is a webpage that will be able to be downloaded onto devices for scouting. 
 The page as it is now
 https://htmlpreview.github.io/?https://github.com/theonlycakes/RoboticScouting/blob/master/Robotics%20Scouting%20Page.html
 
+Will be adding a page that can be used for Pit Scouting at some point 
