@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Robotics Scouting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 	
+<style>
+	body {
+		background-color: white;
+	}
+	h1 {
+		color: black;
+	}
+	p {
+		font-weight: bold;
+		color: black;
+	}
+	form {
+		font-weight: bold;
+	}
+</style>	
+</head>
+
+<body>
+	<h1>Perkiomen Valley Robotics</h1>
+	<!-- form information -->
+	<p>Team Number</p>
+		<input type="number" id="teamNum">
+	<p>Enter Stuff from Pit Scouting</p>
+	<textarea id="teamInfo" rows="8" cols="50"></textarea>
+
+	<br><br>
+		<input type="button" value="Save" onClick="saveFile()">
+</body>
+	<script>
+		let saveFile = () => {
+
+			
+			//concatenates all the variables together
+			let data = teamNum.value + "," + teamInfo.value;
+			
+			//makes the file name 
+			//should be unique for every match 
+			let fileName = teamNum.value + "_Pit";
+			//all this is magic that saves the file
+			//don't touch
+			const textToBLOB = new Blob([data], { type: 'text/plain' });
+        	const sFileName = fileName + ".csv";
+			
+			let newLink = document.createElement("a");
+        		newLink.download = sFileName;
+
+        	if (window.webkitURL != null) {
+            	newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        	}
+        	else {
+            	newLink.href = window.URL.createObjectURL(textToBLOB);
+            	newLink.style.display = "none";
+            	document.body.appendChild(newLink);
+        	}
+
+        	newLink.click(); 
+		}
+	
+	</script>
+</html>
