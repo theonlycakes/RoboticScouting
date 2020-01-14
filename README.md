@@ -9,4 +9,4 @@ https://htmlpreview.github.io/?https://github.com/theonlycakes/RoboticScouting/b
 
 In the process of updating for the 2020 season.
 - [X] Update Pit Scouting Page 
-- [ ] Update Scouting Page
+- [X] Update Scouting Page

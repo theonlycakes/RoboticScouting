@@ -28,37 +28,43 @@
 		<input type="number" id="teamNum">
 	<p>Match Number</p>
 		<input type="number" id="matchNum">
-	<p>Starting Position</p>
+	<p>Did the robot do autonomous</p>
 	<!-- form is needed so the data can be pulled from it with radio buttons -->
-	<form name="startPos">
-		<input type="radio" id="startPos" name="Pos" value="3"> Top <br>
-		<input type="radio" id="startPos1" name="Pos" value="2"> Middle <br>
-		<input type="radio" id="startPos2" name="Pos" value="1"> Bottom
+	<form name="Autonomous">
+		<input type="radio" id="startPos" name="Autonomous" value="1"> Yes <br>
+		<input type="radio" id="startPos1" name="Autonomous" value="0"> No 
 	</form>
-	<p>Balls Your Team Scored</p>
+	<p>Points scored during autonomous Period (<mark>DO NOT</mark> include the 5 for doing autonomous)</p>
+		<input type="number" id="autoPoints">
+	<p>Number of Balls Your Team Scored</p>
 		<input type="number" id="ballPoints">
-	<p>Hatches Your Team Scored</p>
-		<input type="number" id="hatchPoints">
 	<p>Score of Team's Alliance</p>
-		<input type="number" id="teanPoints">	
-	<p>Score of Opposing Alliance</p>
-		<input type="number" id="oppPoints">
+		<input type="number" id="teamPoints">	
+	<!--<p>Score of Opposing Alliance</p>
+		<input type="number" id="oppPoints"> -->
+		<p>Wheel of Fortune </p>
+	<form name="fortune">
+		<input type="radio" id="color" name="fortune" value="2"> Color <br>
+		<input type="radio" id="spin" name="fortune" value="1"> Spin <br>
+		<input type="radio" id="No" name="fortune" value="0"> No <br>
+	</form>	
 	<p>Did YOUR Team Play Defense or Offence</p>
 	<form name="Pos">
-		<input type="radio" id="Pos" name="Pos" value="3"> Defense <br>
-		<input type="radio" id="Pos1" name="Pos" value="2"> Offence <br>
-		<input type="radio" id="Pos2" name="Pos" value="1"> Mixed
+		<input type="radio" id="Pos" name="Pos" value="2"> Defense <br>
+		<input type="radio" id="Pos1" name="Pos" value="1"> Offence <br>
+		<input type="radio" id="Pos2" name="Pos" value="0"> Mixed
 	</form>	
 	<p>Did Robot Stop Performing As Intended?</p>
 	<form name="work">
 		<input type="radio" id="Yes" name="work" value="1"> Yes <br>
-		<input type="radio" id="No" name="work" value="0"> No <br>
+		<input type="radio" id="No1" name="work" value="0"> No <br>
 	</form>	
 	<p>Ending Position</p>
 	<form name="endingPos">
-		<input type="radio" id="endingPos" name="Pos" value="3"> Top <br>
-		<input type="radio" id="endingPos1" name="Pos" value="2"> Middle <br>
-		<input type="radio" id="endingPos2" name="Pos" value="1"> Bottom
+		<input type="radio" id="endingPos" name="Pos" value="3"> Hanging balanced <br>
+		<input type="radio" id="endingPos0" name="Pos" value="2"> Hanging <br>
+		<input type="radio" id="endingPos1" name="Pos" value="1"> On the ground <br>
+		<input type="radio" id="endingPos2" name="Pos" value="0"> Didn't get points
 	</form>
 	<br><br>
 		<input type="button" value="Save" onClick="saveFile()">
@@ -66,14 +72,14 @@
 	<script>
 		let saveFile = () => {
 			//used to get the value from the radio buttons
-			const startPos = document.startPos.elements["Pos"];
+			const Autonomous = document.Autonomous.elements["Autonomous"];
 			const Pos = document.Pos.elements["Pos"];
 			const work = document.work.elements["work"];
 			const endingPos = document.endingPos.elements["Pos"];
+			const fortune = document.fortune.elements["fortune"];
 			
 			//concatenates all the variables together
-			let data = teamNum.value + "," + matchNum.value + "," + startPos.value + "," + ballPoints.value + "," + hatchPoints.value + "," + teanPoints.value
-			 + "," + oppPoints.value + "," + Pos.value + "," + work.value + "," + endingPos.value;
+			let data = teamNum.value + "," + matchNum.value + "," + Autonomous.value + "," + autoPoints.value + "," + ballPoints.value + "," + teamPoints.value + "," + fortune.value + "," + Pos.value + "," + work.value + "," + endingPos.value;
 			
 			//makes the file name 
 			//should be unique for every match 
@@ -81,7 +87,7 @@
 			//all this is magic that saves the file
 			//don't touch
 			const textToBLOB = new Blob([data], { type: 'text/plain' });
-        	const sFileName = fileName + ".csv";
+        	const sFileName = "2020_" + fileName + ".csv";
 			
 			let newLink = document.createElement("a");
         		newLink.download = sFileName;
