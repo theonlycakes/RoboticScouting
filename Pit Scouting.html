@@ -26,7 +26,16 @@
 	<!-- form information -->
 	<p>Team Number</p>
 		<input type="number" id="teamNum">
-	<p>Enter Stuff from Pit Scouting</p>
+	<p>Number of Balls the Robot can hold</p>
+		<input type="number" id="ballsHold">
+	<p>Can the Robot hang</p>
+	<form name="Autonomous">
+		<input type="radio" id="Autonomous" name="auto" value="1"> Yes <br>
+		<input type="radio" id="Autonomous1" name="auto" value="0"> No 
+	</form>
+	<p>Robot Weight</p>
+		<input type="number" id="robotWeight">
+	<p>Other Info</p>
 	<textarea id="teamInfo" rows="8" cols="50"></textarea>
 
 	<br><br>
@@ -37,11 +46,11 @@
 
 			
 			//concatenates all the variables together
-			let data = teamNum.value + "," + teamInfo.value;
+			let data = teamNum.value + "," ballsHold.value + "," + Autonomous.value + "," + robotWeight.value + "," + teamInfo.value;
 			
 			//makes the file name 
 			//should be unique for every match 
-			let fileName = teamNum.value + "_Pit";
+			let fileName = "2020_" + teamNum.value + "_Pit";
 			//all this is magic that saves the file
 			//don't touch
 			const textToBLOB = new Blob([data], { type: 'text/plain' });
