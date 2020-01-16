@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Robotics Scouting</title>
+<title>Team 7414 Scouting</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" /> 	
 <style>
 	body {
@@ -42,11 +42,17 @@
 		<input type="number" id="teamPoints">	
 	<!--<p>Score of Opposing Alliance</p>
 		<input type="number" id="oppPoints"> -->
-		<p>Wheel of Fortune </p>
+	
+	<!-- want to change to use check boxes if possible -->
+		<p>Wheel of Fortune(Part 1)</p>
 	<form name="fortune">
-		<input type="radio" id="color" name="fortune" value="2"> Color <br>
-		<input type="radio" id="spin" name="fortune" value="1"> Spin <br>
+		<input type="radio" id="color" name="fortune" value="1"> Color <br>
 		<input type="radio" id="No" name="fortune" value="0"> No <br>
+	</form>	
+	<p>Wheel of Fortune(Part 2)</p>
+	<form name="fortune1">
+		<input type="radio" id="spin" name="fortune1" value="1"> Spin <br>
+		<input type="radio" id="No1" name="fortune1" value="0"> No <br>
 	</form>	
 	<p>Did YOUR Team Play Defense or Offence</p>
 	<form name="Pos">
@@ -57,7 +63,7 @@
 	<p>Did Robot Stop Performing As Intended?</p>
 	<form name="work">
 		<input type="radio" id="Yes" name="work" value="1"> Yes <br>
-		<input type="radio" id="No1" name="work" value="0"> No <br>
+		<input type="radio" id="No11" name="work" value="0"> No <br>
 	</form>	
 	<p>Ending Position</p>
 	<form name="endingPos">
@@ -77,9 +83,9 @@
 			const work = document.work.elements["work"];
 			const endingPos = document.endingPos.elements["Pos"];
 			const fortune = document.fortune.elements["fortune"];
-			
+			const fortune1 = document.fortune1.elements["fortune1"];			
 			//concatenates all the variables together
-			let data = teamNum.value + "," + matchNum.value + "," + Autonomous.value + "," + autoPoints.value + "," + ballPoints.value + "," + teamPoints.value + "," + fortune.value + "," + Pos.value + "," + work.value + "," + endingPos.value;
+			let data = teamNum.value + "," + matchNum.value + "," + Autonomous.value + "," + autoPoints.value + "," + ballPoints.value + "," + teamPoints.value + "," + fortune.value + "," + fortune1.value + "," + Pos.value + "," + work.value + "," + endingPos.value;
 			
 			//makes the file name 
 			//should be unique for every match 
