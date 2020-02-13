@@ -37,7 +37,9 @@
 	<p>Points scored during autonomous Period (<mark>DO NOT</mark> include the 5 for doing autonomous)</p>
 		<input type="number" id="autoPoints">
 	<p>Number of Balls Your Team Scored</p>
-		<input type="number" id="ballPoints">
+		<input type="number" id="ballPoints" value="0">
+		<input type="button" onClick="valueAdd()" value = "+">
+		<input type="button" onClick="valueSub()" value = "-">
 	<p>Score of Team's Alliance</p>
 		<input type="number" id="teamPoints">	
 	<!--<p>Score of Opposing Alliance</p>
@@ -108,6 +110,19 @@
         	}
 
         	newLink.click(); 
+		}
+		
+		let valueAdd = () => {
+			var x = parseInt(document.getElementById("ballPoints").value);
+			var y = 1;
+			var total = x + y;
+			document.getElementById("ballPoints").value = total;
+		}
+		let valueSub = () => {
+			var x = parseInt(document.getElementById("ballPoints").value);
+			var y = 1;
+			var total = x - y;
+			document.getElementById("ballPoints").value = total;
 		}
 	
 	</script>
