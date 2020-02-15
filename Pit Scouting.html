@@ -39,7 +39,9 @@
 	<textarea id="teamInfo" rows="8" cols="50"></textarea>
 
 	<br><br>
-		<input type="button" value="Save" onClick="saveFile()">
+		<input type="button" value="Save" onClick="saveFile()"><br><br>
+	<p>Warning make sure you have saved the data before clicking</p>
+	<input type="button" value="Clear Page" onClick="refresh()">
 </body>
 	<script>
 		let saveFile = () => {
@@ -71,6 +73,11 @@
 
         	newLink.click(); 
 		}
-	
+	//code for the refresh page button
+		function refresh() {    
+    		setTimeout(function () {
+        		location.reload()
+			}, 100);
+		}
 	</script>
 </html>

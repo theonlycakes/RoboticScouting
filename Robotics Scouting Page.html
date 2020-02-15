@@ -77,7 +77,9 @@
 		<input type="radio" id="endingPos2" name="Pos" value="0"> Didn't get points
 	</form>
 	<br><br>
-		<input type="button" value="Save" onClick="saveFile()">
+		<input type="button" value="Save" onClick="saveFile()"><br><br>
+	<p>Warning make sure you have saved the data before clicking</p>
+	<input type="button" value="Clear Page" onClick="refresh()">
 </body>
 	<script>
 		let saveFile = () => {
@@ -137,6 +139,12 @@
 			var y = 1;
 			var total = x - y;
 			document.getElementById("autoPoints").value = total;
+		}
+		//code for the refresh page button
+		function refresh() {    
+    		setTimeout(function () {
+        		location.reload()
+			}, 100);
 		}
 	
 	</script>
