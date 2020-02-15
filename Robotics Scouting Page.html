@@ -34,8 +34,10 @@
 		<input type="radio" id="startPos" name="Autonomous" value="1"> Yes <br>
 		<input type="radio" id="startPos1" name="Autonomous" value="0"> No 
 	</form>
-	<p>Points scored during autonomous Period (<mark>DO NOT</mark> include the 5 for doing autonomous)</p>
-		<input type="number" id="autoPoints">
+	<p>Balls scored during autonomous Period</p>
+		<input type="number" id="autoPoints" value="0">
+		<input type="button" onClick="valueAdd1()" value = "+">
+		<input type="button" onClick="valueSub1()" value = "-">
 	<p>Number of Balls Your Team Scored</p>
 		<input type="number" id="ballPoints" value="0">
 		<input type="button" onClick="valueAdd()" value = "+">
@@ -111,7 +113,7 @@
 
         	newLink.click(); 
 		}
-		
+		//code for +/- buttons
 		let valueAdd = () => {
 			var x = parseInt(document.getElementById("ballPoints").value);
 			var y = 1;
@@ -123,6 +125,18 @@
 			var y = 1;
 			var total = x - y;
 			document.getElementById("ballPoints").value = total;
+		}
+		let valueAdd1 = () => {
+			var x = parseInt(document.getElementById("autoPoints").value);
+			var y = 1;
+			var total = x + y;
+			document.getElementById("autoPoints").value = total;
+		}
+		let valueSub1 = () => {
+			var x = parseInt(document.getElementById("autoPoints").value);
+			var y = 1;
+			var total = x - y;
+			document.getElementById("autoPoints").value = total;
 		}
 	
 	</script>
