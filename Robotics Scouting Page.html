@@ -25,9 +25,9 @@
 	<h1>Perkiomen Valley Robotics</h1>
 	<!-- form information -->
 	<p>Team Number</p>
-		<input type="number" id="teamNum">
+		<input type="number" id="teamNum" value="0">
 	<p>Match Number</p>
-		<input type="number" id="matchNum">
+		<input type="number" id="matchNum" value="0">
 	<p>Did the robot do autonomous</p>
 	<!-- form is needed so the data can be pulled from it with radio buttons -->
 	<form name="Autonomous">
@@ -43,20 +43,16 @@
 		<input type="button" onClick="valueAdd()" value = "+">
 		<input type="button" onClick="valueSub()" value = "-">
 	<p>Score of Team's Alliance</p>
-		<input type="number" id="teamPoints">	
+		<input type="number" id="teamPoints" value="0">	
 	<!--<p>Score of Opposing Alliance</p>
 		<input type="number" id="oppPoints"> -->
 	
 	<!-- want to change to use check boxes if possible -->
-		<p>Wheel of Fortune(Part 1)</p>
+		<p>Wheel of Fortune</p>
 	<form name="fortune">
-		<input type="radio" id="color" name="fortune" value="1"> Color <br>
-		<input type="radio" id="No" name="fortune" value="0"> No <br>
-	</form>	
-	<p>Wheel of Fortune(Part 2)</p>
-	<form name="fortune1">
-		<input type="radio" id="spin" name="fortune1" value="1"> Spin <br>
-		<input type="radio" id="No1" name="fortune1" value="0"> No <br>
+		<input type="checkbox" id="color" name="fortune" value="2"> Color <br>
+		<input type="checkbox" id="spin" name="fortune" value="1"> Spin <br>
+		<input type="checkbox" id="No" name="fortune" value="0"> No <br>
 	</form>	
 	<p>Did YOUR Team Play Defense or Offence</p>
 	<form name="Pos">
@@ -69,14 +65,20 @@
 		<input type="radio" id="Yes" name="work" value="1"> Yes <br>
 		<input type="radio" id="No11" name="work" value="0"> No <br>
 	</form>	
+	<p>Why did the Robot stop working <mark>ONLY ANSWER IF YOU ANSWERED YES TO IT STOPPED WORKING</mark></p>
+	<form name="reason">
+		<input type="radio" id="mech" name="reason" value="3"> Mechanical Failure <br>
+		<input type="radio" id="field" name="reason" value="2"> Field Stopped Working <br>
+		<input type="radio" id="other" name="reason" value="1"> Other/Reason Unknown <br>
+	</form>
 	<p>Ending Position</p>
 	<form name="endingPos">
-		<input type="radio" id="endingPos" name="Pos" value="3"> Hanging balanced <br>
-		<input type="radio" id="endingPos0" name="Pos" value="2"> Hanging <br>
-		<input type="radio" id="endingPos1" name="Pos" value="1"> On the ground <br>
-		<input type="radio" id="endingPos2" name="Pos" value="0"> Didn't get points
+		<input type="radio" id="endingPos" name="endingPos" value="3"> Hanging balanced <br>
+		<input type="radio" id="endingPos0" name="endingPos" value="2"> Hanging <br>
+		<input type="radio" id="endingPos1" name="endingPos" value="1"> On the ground <br>
+		<input type="radio" id="endingPos2" name="endingPos" value="0"> Didn't get points
 	</form>
-	<br><br>
+	<p>Please make sure all fields are filled out before saving</p>
 		<input type="button" value="Save" onClick="saveFile()"><br><br>
 	<p>Warning make sure you have saved the data before clicking</p>
 	<input type="button" value="Clear Page" onClick="refresh()">
@@ -84,14 +86,65 @@
 	<script>
 		let saveFile = () => {
 			//used to get the value from the radio buttons
-			const Autonomous = document.Autonomous.elements["Autonomous"];
-			const Pos = document.Pos.elements["Pos"];
-			const work = document.work.elements["work"];
-			const endingPos = document.endingPos.elements["Pos"];
-			const fortune = document.fortune.elements["fortune"];
-			const fortune1 = document.fortune1.elements["fortune1"];			
+			var Autonomous = document.Autonomous.elements["Autonomous"];
+			var Pos = document.Pos.elements["Pos"];
+			var work = document.work.elements["work"];
+			var endingPos = document.endingPos.elements["endingPos"];
+			var reason = document.reason.elements["reason"];
+			//Fill out default values if blank
+			if(Autonomous.value == 1){
+				Autonomous = 1;
+			} else {
+				Autonomous = 0;
+			}
+			
+			if(Pos.value == 2){
+				Pos = 2;
+			} else if (Pos.value == 1) {
+				Pos = 1;
+			} else {
+				Pos = 0;
+			}
+			
+			if(endingPos.value == 3){
+				endingPos = 3;
+			} else if (endingPos.value == 2) {
+				endingPos = 2;
+			} else if (endingPos.value == 1) {
+				endingPos = 1;
+			} else {
+				endingPos = 0;
+			}
+			
+			if(work.value == 1){
+				work = 1;
+			} else {
+				work = 0;
+			}
+			
+			if(reason.value == 3){
+				reason = 3;
+			} else if (reason.value == 2) {
+				reason = 2;
+			} else if (reason.value == 1) {
+				reason = 1;
+			} else {
+				reason = 0;
+			}
+			//Sees if the checkbox is checked and if so it adds the value 
+			var fortune = 0;
+			if (document.getElementById('color').checked) {
+				fortune+=2;
+			} else {
+            	fortune+=0;
+        	}
+			if (document.getElementById('spin').checked) {
+				fortune+=1;
+			} else {
+            	fortune+=0;
+        	}	
 			//concatenates all the variables together
-			let data = teamNum.value + "," + matchNum.value + "," + Autonomous.value + "," + autoPoints.value + "," + ballPoints.value + "," + teamPoints.value + "," + fortune.value + "," + fortune1.value + "," + Pos.value + "," + work.value + "," + endingPos.value;
+			let data = teamNum.value + "," + matchNum.value + "," + Autonomous + "," + autoPoints.value + "," + ballPoints.value + "," + teamPoints.value + "," + fortune + "," + Pos + "," + work + "," + reason + "," + endingPos;
 			
 			//makes the file name 
 			//should be unique for every match 
