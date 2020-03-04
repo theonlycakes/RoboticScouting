@@ -82,6 +82,9 @@
 		<input type="button" value="Save" onClick="saveFile()"><br><br>
 	<p>Warning make sure you have saved the data before clicking</p>
 	<input type="button" value="Clear Page" onClick="refresh()">
+	<form  method="post" enctype="multipart/form-data">
+    	<input type="submit" onClick="saveFileOnline()" name="submit">
+	</form>
 </body>
 	<script>
 		let saveFile = () => {
@@ -168,6 +171,98 @@
 
         	newLink.click(); 
 		}
+		
+		//For online upload
+		let saveFileOnline = () => {
+			//used to get the value from the radio buttons
+			var Autonomous = document.Autonomous.elements["Autonomous"];
+			var Pos = document.Pos.elements["Pos"];
+			var work = document.work.elements["work"];
+			var endingPos = document.endingPos.elements["endingPos"];
+			var reason = document.reason.elements["reason"];
+			//Fill out default values if blank
+			if(Autonomous.value == 1){
+				Autonomous = 1;
+			} else {
+				Autonomous = 0;
+			}
+			
+			if(Pos.value == 2){
+				Pos = 2;
+			} else if (Pos.value == 1) {
+				Pos = 1;
+			} else {
+				Pos = 0;
+			}
+			
+			if(endingPos.value == 3){
+				endingPos = 3;
+			} else if (endingPos.value == 2) {
+				endingPos = 2;
+			} else if (endingPos.value == 1) {
+				endingPos = 1;
+			} else {
+				endingPos = 0;
+			}
+			
+			if(work.value == 1){
+				work = 1;
+			} else {
+				work = 0;
+			}
+			
+			if(reason.value == 3){
+				reason = 3;
+			} else if (reason.value == 2) {
+				reason = 2;
+			} else if (reason.value == 1) {
+				reason = 1;
+			} else {
+				reason = 0;
+			}
+			//Sees if the checkbox is checked and if so it adds the value 
+			var fortune = 0;
+			if (document.getElementById('color').checked) {
+				fortune+=2;
+			} else {
+            	fortune+=0;
+        	}
+			if (document.getElementById('spin').checked) {
+				fortune+=1;
+			} else {
+            	fortune+=0;
+        	}	
+			//concatenates all the variables together
+			let data = teamNum.value + "," + matchNum.value + "," + Autonomous + "," + autoPoints.value + "," + ballPoints.value + "," + teamPoints.value + "," + fortune + "," + Pos + "," + work + "," + reason + "," + endingPos;
+			
+			//makes the file name 
+			//should be unique for every match 
+			let fileName = teamNum.value + "_" + matchNum.value;
+			//all this is magic that saves the file
+			//don't touch
+			const textToBLOB = new Blob([data], { type: 'text/plain' });
+        	const sFileName = "2020_" + fileName + ".csv";
+			
+			let newLink = document.createElement("a");
+        		newLink.download = sFileName;
+
+        	if (window.webkitURL != null) {
+            	newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        	}
+        	else {
+            	newLink.href = window.URL.createObjectURL(textToBLOB);
+            	newLink.style.display = "none";
+            	document.body.appendChild(document.getElementById('fileToUpload'));
+        	}
+
+        	const url = 'upload.php'
+			const form = document.querySelector(textToBLOB)
+			
+		}
+		
+		
+		
+		
 		//code for +/- buttons
 		let valueAdd = () => {
 			var x = parseInt(document.getElementById("ballPoints").value);
