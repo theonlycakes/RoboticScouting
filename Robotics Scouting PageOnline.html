@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Team 7414 Scouting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 	
+<style>
+	body {
+		background-color: white;
+	}
+	h1 {
+		color: black;
+	}
+	p {
+		font-weight: bold;
+		color: black;
+	}
+	form {
+		font-weight: bold;
+	}
+</style>	
+</head>
+
+<body>
+	<h1>Perkiomen Valley Robotics</h1>
+	<!-- form information -->
+	<p>Team Number</p>
+		<input type="number" id="teamNum" value="0">
+	<p>Match Number</p>
+		<input type="number" id="matchNum" value="0">
+	<p>Did the robot do autonomous</p>
+	<!-- form is needed so the data can be pulled from it with radio buttons -->
+	<form name="Autonomous">
+		<input type="radio" id="startPos" name="Autonomous" value="1"> Yes <br>
+		<input type="radio" id="startPos1" name="Autonomous" value="0"> No 
+	</form>
+	<p>Balls scored during autonomous Period</p>
+		<input type="number" id="autoPoints" value="0">
+		<input type="button" onClick="valueAdd1()" value = "+">
+		<input type="button" onClick="valueSub1()" value = "-">
+	<p>Number of Balls Your Team Scored</p>
+		<input type="number" id="ballPoints" value="0">
+		<input type="button" onClick="valueAdd()" value = "+">
+		<input type="button" onClick="valueSub()" value = "-">
+	<p>Score of Team's Alliance</p>
+		<input type="number" id="teamPoints" value="0">	
+	<!--<p>Score of Opposing Alliance</p>
+		<input type="number" id="oppPoints"> -->
+	
+	<!-- want to change to use check boxes if possible -->
+		<p>Wheel of Fortune</p>
+	<form name="fortune">
+		<input type="checkbox" id="color" name="fortune" value="2"> Color <br>
+		<input type="checkbox" id="spin" name="fortune" value="1"> Spin <br>
+		<input type="checkbox" id="No" name="fortune" value="0"> No <br>
+	</form>	
+	<p>Did YOUR Team Play Defense or Offence</p>
+	<form name="Pos">
+		<input type="radio" id="Pos" name="Pos" value="2"> Defense <br>
+		<input type="radio" id="Pos1" name="Pos" value="1"> Offence <br>
+		<input type="radio" id="Pos2" name="Pos" value="0"> Mixed
+	</form>	
+	<p>Did Robot Stop Performing As Intended?</p>
+	<form name="work">
+		<input type="radio" id="Yes" name="work" value="1"> Yes <br>
+		<input type="radio" id="No11" name="work" value="0"> No <br>
+	</form>	
+	<p>Why did the Robot stop working <mark>ONLY ANSWER IF YOU ANSWERED YES TO IT STOPPED WORKING</mark></p>
+	<form name="reason">
+		<input type="radio" id="mech" name="reason" value="3"> Mechanical Failure <br>
+		<input type="radio" id="field" name="reason" value="2"> Field Stopped Working <br>
+		<input type="radio" id="other" name="reason" value="1"> Other/Reason Unknown <br>
+	</form>
+	<p>Ending Position</p>
+	<form name="endingPos">
+		<input type="radio" id="endingPos" name="endingPos" value="3"> Hanging balanced <br>
+		<input type="radio" id="endingPos0" name="endingPos" value="2"> Hanging <br>
+		<input type="radio" id="endingPos1" name="endingPos" value="1"> On the ground <br>
+		<input type="radio" id="endingPos2" name="endingPos" value="0"> Didn't get points
+	</form>
+	<p>Please make sure all fields are filled out before saving</p>
+	<form action="upload.php" method="post">
+	<input type="text" id="fileNames" name="name" value="0" hidden="true">
+	<input type="text" id="fileDatas" name="data" value="1" hidden="true">
+		<input type="submit" onClick="saveFileOnline()" name="submit">
+	</form>
+	
+</body>
+	<script>
+		//For online upload
+		let saveFileOnline = () => {
+			//used to get the value from the radio buttons
+			var Autonomous = document.Autonomous.elements["Autonomous"];
+			var Pos = document.Pos.elements["Pos"];
+			var work = document.work.elements["work"];
+			var endingPos = document.endingPos.elements["endingPos"];
+			var reason = document.reason.elements["reason"];
+			//Fill out default values if blank
+			if(Autonomous.value == 1){
+				Autonomous = 1;
+			} else {
+				Autonomous = 0;
+			}
+			
+			if(Pos.value == 2){
+				Pos = 2;
+			} else if (Pos.value == 1) {
+				Pos = 1;
+			} else {
+				Pos = 0;
+			}
+			
+			if(endingPos.value == 3){
+				endingPos = 3;
+			} else if (endingPos.value == 2) {
+				endingPos = 2;
+			} else if (endingPos.value == 1) {
+				endingPos = 1;
+			} else {
+				endingPos = 0;
+			}
+			
+			if(work.value == 1){
+				work = 1;
+			} else {
+				work = 0;
+			}
+			
+			if(reason.value == 3){
+				reason = 3;
+			} else if (reason.value == 2) {
+				reason = 2;
+			} else if (reason.value == 1) {
+				reason = 1;
+			} else {
+				reason = 0;
+			}
+			//Sees if the checkbox is checked and if so it adds the value 
+			var fortune = 0;
+			if (document.getElementById('color').checked) {
+				fortune+=2;
+			} else {
+            	fortune+=0;
+        	}
+			if (document.getElementById('spin').checked) {
+				fortune+=1;
+			} else {
+            	fortune+=0;
+        	}	
+			//concatenates all the variables together
+			let data = teamNum.value + "," + matchNum.value + "," + Autonomous + "," + autoPoints.value + "," + ballPoints.value + "," + teamPoints.value + "," + fortune + "," + Pos + "," + work + "," + reason + "," + endingPos;
+			
+			//makes the file name 
+			//should be unique for every match 
+			let fileName = teamNum.value + "_" + matchNum.value;
+			//all this is magic that saves the file
+			//don't touch
+			const textToBLOB = new Blob([data], { type: 'text/plain' });
+        	const sFileName = "2020_" + fileName + ".csv";
+			
+			fileNames.value = sFileName;
+			fileDatas.value = data;
+		}
+		
+		
+		
+		
+		//code for +/- buttons
+		let valueAdd = () => {
+			var x = parseInt(document.getElementById("ballPoints").value);
+			var y = 1;
+			var total = x + y;
+			document.getElementById("ballPoints").value = total;
+		}
+		let valueSub = () => {
+			var x = parseInt(document.getElementById("ballPoints").value);
+			var y = 1;
+			var total = x - y;
+			document.getElementById("ballPoints").value = total;
+		}
+		let valueAdd1 = () => {
+			var x = parseInt(document.getElementById("autoPoints").value);
+			var y = 1;
+			var total = x + y;
+			document.getElementById("autoPoints").value = total;
+		}
+		let valueSub1 = () => {
+			var x = parseInt(document.getElementById("autoPoints").value);
+			var y = 1;
+			var total = x - y;
+			document.getElementById("autoPoints").value = total;
+		}
+	
+	</script>
+</html>
